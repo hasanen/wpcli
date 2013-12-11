@@ -2,8 +2,11 @@ require "wpcli/version"
 
 module WPCLI
   class Client
+    def initialize path = ""
+      @path = path
+    end
     def run command
-      output = `wp #{command}`
+      output = `wp#{@path.empty? ? " " : " --path=" + @path + " "}#{command}`
       parse output
     end
 

@@ -2,21 +2,7 @@ require 'spec_helper'
 
 describe WPCLI::Client do
 
-  describe '.new' do
-
-  end
-  describe 'run' do
-    let(:wp_user_list) do <<EOF
-+----+--------------------------+----------------+------------------------------+---------------------+------------------------------------+
-| ID | user_login               | display_name   | user_email                   | user_registered     | roles                              |
-+----+--------------------------+----------------+------------------------------+---------------------+------------------------------------+
-| 1  | test@domain.com          | Test 1         | test@domain.com              | 2013-11-24 19:26:45 | administrator                      |
-| 2  | test@domain.net          | Test 2         | test@domain.net              | 2013-11-25 12:41:38 | author                             |
-+----+--------------------------+----------------+------------------------------+---------------------+------------------------------------+
-EOF
-    end
-
-    let(:wp_role_list) do <<EOF
+  let(:wp_role_list) do <<EOF
 +------------------+------------------------------------+
 | name             | role                               |
 +------------------+------------------------------------+
@@ -26,6 +12,31 @@ EOF
 | Contributor      | contributor                        |
 | Subscriber       | subscriber                         |
 +------------------+------------------------------------+
+EOF
+    end
+  describe '.new' do
+    let(:path) { "path_to_wp" }
+    let(:command) { "user role" }
+
+    before :each do
+      @wpcli = WPCLI::Client.new path
+        @wpcli.stub(:`).with("wp --path=#{path} #{command}").and_return(wp_role_list)
+    end
+    context 'with path' do
+      it 'uses --path parameter' do
+        @array = @wpcli.run command
+        @array.kind_of?(Array).should be(true)
+      end
+    end
+  end
+  describe 'run' do
+    let(:wp_user_list) do <<EOF
++----+--------------------------+----------------+------------------------------+---------------------+------------------------------------+
+| ID | user_login               | display_name   | user_email                   | user_registered     | roles                              |
++----+--------------------------+----------------+------------------------------+---------------------+------------------------------------+
+| 1  | test@domain.com          | Test 1         | test@domain.com              | 2013-11-24 19:26:45 | administrator                      |
+| 2  | test@domain.net          | Test 2         | test@domain.net              | 2013-11-25 12:41:38 | author                             |
++----+--------------------------+----------------+------------------------------+---------------------+------------------------------------+
 EOF
     end
 
