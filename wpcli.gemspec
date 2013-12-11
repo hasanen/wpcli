@@ -5,7 +5,7 @@ require 'wpcli/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "wpcli"
-  spec.version       = Wpcli::VERSION
+  spec.version       = WPCLI::VERSION
   spec.authors       = ["Joni Hasanen"]
   spec.email         = ["joni.hasanen@pieceofcode.net"]
   spec.description   = %q{Simple wrapper for wp-cli}

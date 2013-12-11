@@ -1,50 +1,6 @@
 require 'spec_helper'
 
-module WP
-  class Client
-    def run command
-      output = `wp #{command}`
-      parse output
-    end
-
-    private
-
-    def parse text
-      rows = []
-      text.split("\n").each_with_index do |line, index|
-        unless separator? line
-          if index < 3
-            @columns = parse_header line
-          else
-            rows << parse_line(line)
-          end
-        end
-      end
-      rows
-    end
-
-    def parse_header line
-      columns = []
-      line.split('|').each_with_index do |column, index|
-        columns[index] = column.strip.downcase unless column.strip.empty?
-      end
-      columns
-    end
-    def parse_line line
-      hash = {}
-      line.split('|').each_with_index do |column, index|
-        hash[@columns[index].to_sym] = column.strip unless @columns[index].nil?
-      end
-      hash
-    end
-
-    def separator? line
-      line.start_with? "+"
-    end
-  end
-end
-
-describe WP::Client do
+describe WPCLI::Client do
   describe 'commands' do
     let(:wp_user_list) do <<EOF
 +----+--------------------------+----------------+------------------------------+---------------------+------------------------------------+
@@ -70,7 +26,7 @@ EOF
     end
 
     before :each do
-      @wpcli = WP::Client.new
+      @wpcli = WPCLI::Client.new
     end
 
     describe 'run' do
