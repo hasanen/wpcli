@@ -1,6 +1,6 @@
 # Wpcli
 
-TODO: Write a gem description
+Simple wrapper for wp-cli
 
 ## Installation
 
@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+T
 
 ## Contributing
 
