@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe WPCLI::Client do
-  describe 'commands' do
+
+  describe '.new' do
+
+  end
+  describe 'run' do
     let(:wp_user_list) do <<EOF
 +----+--------------------------+----------------+------------------------------+---------------------+------------------------------------+
 | ID | user_login               | display_name   | user_email                   | user_registered     | roles                              |
@@ -29,29 +33,27 @@ EOF
       @wpcli = WPCLI::Client.new
     end
 
-    describe 'run' do
-      context 'role list' do
-        before :each do
-          @wpcli.stub(:`).with("wp role list").and_return(wp_role_list)
-          @array = @wpcli.run "role list"
+    context 'role list' do
+      before :each do
+        @wpcli.stub(:`).with("wp role list").and_return(wp_role_list)
+        @array = @wpcli.run "role list"
+      end
+
+      describe 'returns array' do
+        it { @array.kind_of?(Array).should be(true)}
+
+        it 'which contains hashes' do
+          @array.first.kind_of?(Hash).should be(true)
         end
 
-        describe 'returns array' do
-          it { @array.kind_of?(Array).should be(true)}
+        it 'which has five hashes' do
+          @array.size.should eq(5)
+        end
 
-          it 'which contains hashes' do
-            @array.first.kind_of?(Hash).should be(true)
-          end
-
-          it 'which has five hashes' do
-            @array.size.should eq(5)
-          end
-
-          it 'first hash has correct columns' do
-            @array.first.has_key?(:name).should be(true)
-            @array.first.has_key?(:role).should be(true)
-            @array.first.keys.size.should eq(2)
-          end
+        it 'first hash has correct columns' do
+          @array.first.has_key?(:name).should be(true)
+          @array.first.has_key?(:role).should be(true)
+          @array.first.keys.size.should eq(2)
         end
       end
     end
