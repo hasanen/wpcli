@@ -1,3 +1,3 @@
-module Wpcli
+module WPCLI
   VERSION = "0.0.1"
 end
