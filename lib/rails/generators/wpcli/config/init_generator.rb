@@ -1,7 +1,7 @@
 module Wpcli
   module Generators
-    class ConfigGenerator < Rails::Generators::Base
-      desc 'Generates config example for your rails app'
+    class InitGenerator < Rails::Generators::Base
+      desc 'Generates example config for your rails app'
 
       def self.source_root
          @_wpcli_source_root ||= File.expand_path("../templates", __FILE__)
