@@ -1,6 +1,6 @@
 require "wpcli/version"
 
-module WPCLI
+module Wpcli
   class Client
     def initialize path = ""
       @path = path

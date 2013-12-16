@@ -1,4 +1,4 @@
-module WPCLI
+module Wpcli
   module Generators
     class ConfigGenerator < Rails::Generators::Base
       desc 'Generates config example for your rails app'
