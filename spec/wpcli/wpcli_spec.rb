@@ -27,24 +27,14 @@ EOF
     let(:path) { "path_to_wp" }
     let(:command) { "user role" }
 
-    context 'with path' do
-      before :each do
-        @wpcli = Wpcli::Client.new path
+    before :each do
+      @wpcli = Wpcli::Client.new path
         @wpcli.stub(:`).with("wp --path=#{path} #{command}").and_return(wp_role_list)
-      end
-
+    end
+    context 'with path' do
       it 'uses --path parameter' do
         @array = @wpcli.run command
         @array.kind_of?(Array).should be(true)
-      end
-    end
-    context 'with symbol' do
-      context 'wpcli.yml exists' do
-        context 'with key' do
-          it 'returns instance' do
-            Wpcli::Client.new(:key).should_not eq(nil)
-          end
-        end
       end
     end
   end
