@@ -1,7 +1,11 @@
 module Wpcli
   class Client
     def initialize path = ""
-      @path = path
+      case path
+      when String
+        @path = path
+      end
+      nil if @path.empty?
     end
     def run command
       output = `wp#{@path.empty? ? " " : " --path=" + @path + " "}#{command}`
