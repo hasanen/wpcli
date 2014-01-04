@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe WPCLI::Client do
+describe Wpcli::Client do
   let(:wp_user_list) do <<EOF
 +----+--------------------------+----------------+------------------------------+---------------------+------------------------------------+
 | ID | user_login               | display_name   | user_email                   | user_registered     | roles                              |
@@ -28,7 +28,7 @@ EOF
     let(:command) { "user role" }
 
     before :each do
-      @wpcli = WPCLI::Client.new path
+      @wpcli = Wpcli::Client.new path
         @wpcli.stub(:`).with("wp --path=#{path} #{command}").and_return(wp_role_list)
     end
     context 'with path' do
@@ -40,7 +40,7 @@ EOF
   end
   describe 'run' do
     before :each do
-      @wpcli = WPCLI::Client.new
+      @wpcli = Wpcli::Client.new
     end
 
     context 'role list' do
