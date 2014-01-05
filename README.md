@@ -26,7 +26,7 @@ Generate example config
 
     rails g wpcli:config
 
-Generated file (wpcli.yml)
+Generated file (config/wpcli.yml)
 
     config:
         apps:
