@@ -26,14 +26,19 @@ Generate example config
 
     rails g wpcli:config
 
+Generated file (wpcli.yml)
+
+    config:
+        apps:
+            key_for_installation: /absolute/path/for/my/wp-installation
 In controller include module
 
-    class PagesController < ApplicationController
+    class MyController < ApplicationController
       include Wpcli
 
 And then you can use client with key:
 
-     wpcli(:key_for_your_installation).run "user list"
+     wpcli(:key_for_installation).run "user list"
 
 ## Alternative way
 
