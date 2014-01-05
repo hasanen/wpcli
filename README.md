@@ -1,6 +1,6 @@
 # Wpcli
 
-Simple wrapper for wp-cli (http://wp-cli.org/). 
+Simple wrapper for wp-cli (http://wp-cli.org/).
 
 Just pass commands (http://wp-cli.org/commands/) to run method and use returned hash as you wish.
 
@@ -20,21 +20,25 @@ Or install it yourself as:
 
 ## Rails
 
-Simplest way to use in rails is to create config file and use methods from module. 
+Simplest way to use in rails is to create config file and use methods from module.
 
 Generate example config
+
     rails g wpcli:config
 
 In controller include module
-  class PagesController < ApplicationController
-    include Wpcli
+
+    class PagesController < ApplicationController
+      include Wpcli
 
 And then you can use client with key:
-  wpcli(:key_for_your_installation).run "user list"
+
+     wpcli(:key_for_your_installation).run "user list"
 
 ## Alternative way
 
 If you like to use client for example in command line, you can create instance with path of wordpress installation
+
     @wpcli = Wpcli::Client.new "path/to/wp"
     @wpcli.run "user list"
 
