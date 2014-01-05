@@ -28,9 +28,9 @@ Generate example config
 
 Generated file (config/wpcli.yml)
 
-    config:
-        apps:
-            key_for_installation: /absolute/path/for/my/wp-installation
+    apps:
+        key_for_installation: /absolute/path/for/my/wp-installation
+
 In controller include module
 
     class MyController < ApplicationController
@@ -38,14 +38,14 @@ In controller include module
 
 And then you can use client with key:
 
-     wpcli(:key_for_installation).run "user list"
+     users = wpcli(:key_for_installation).run "user list"
 
 ## Alternative way
 
 If you like to use client for example in command line, you can create instance with path of wordpress installation
 
     @wpcli = Wpcli::Client.new "path/to/wp"
-    @wpcli.run "user list"
+    users = @wpcli.run "user list"
 
 ## Contributing
 

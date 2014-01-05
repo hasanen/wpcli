@@ -1,3 +1,2 @@
-config:
-  apps:
+apps:
     key_for_installation: /absolute/path/for/my/wp-installation
