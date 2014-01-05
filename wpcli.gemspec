@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Wpcli::VERSION
   spec.authors       = ["Joni Hasanen"]
   spec.email         = ["joni.hasanen@pieceofcode.net"]
-  spec.description   = %q{Simple wrapper for wp-cli}
-  spec.summary       = %q{Simple wrapper for wp-cli}
+  spec.description   = %q{Simple wrapper for wp-cli (http://wp-cli.org/)}
+  spec.summary       = %q{Simple wrapper for wp-cli (http://wp-cli.org/)}
   spec.homepage      = ""
   spec.license       = "MIT"
 
