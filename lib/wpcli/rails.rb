@@ -11,9 +11,7 @@ module Wpcli
     config = YAML.load(file)
 
     @apps = {}
-    p config
     config["config"]["apps"].each do |key, path|
-      p "#{key} - #{path}"
       @apps[key] = Client.new path
     end
   end
