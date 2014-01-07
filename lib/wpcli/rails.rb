@@ -12,7 +12,7 @@ module Wpcli
 
     @apps = {}
     config["apps"].each do |key, path|
-      @apps[key] = Client.new path
+      @apps[key.to_sym] = Client.new path
     end
   end
 end
