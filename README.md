@@ -8,7 +8,7 @@ Just pass commands (http://wp-cli.org/commands/) to run method and use returned 
 
 Add this line to your application's Gemfile:
 
-    gem 'wpcli', "~> 0.1.1"
+    gem 'wpcli', "~> 0.1.2"
 
 And then execute:
 
