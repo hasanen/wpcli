@@ -10,6 +10,8 @@ describe Wpcli::Client do
 +----+--------------------------+----------------+------------------------------+---------------------+------------------------------------+
 EOF
     end
+let(:wp_user_list_tabs_newlines) { "ID\tuser_login\tdisplay_name\tuser_email\tuser_registered\troles\n1\tadmin\tadmin\tadmin@domain.tld\t2014-01-07 09:04:08\tadministrator\n" }
+
 
   let(:wp_role_list) do <<EOF
 +------------------+------------------------------------+
@@ -69,30 +71,60 @@ EOF
     end
 
     context 'user list' do
-      before :each do
-        @wpcli.stub(:`).with("wp user list").and_return(wp_user_list)
-        @array = @wpcli.run "user list"
+      context 'pretty format' do
+        before :each do
+          @wpcli.stub(:`).with("wp user list").and_return(wp_user_list)
+          @array = @wpcli.run "user list"
+        end
+
+        describe 'returns array' do
+          it { @array.kind_of?(Array).should be(true) }
+
+          it 'which contains hashes' do
+            @array.first.kind_of?(Hash).should be(true)
+          end
+
+          it 'which has two hashes' do
+           @array.size.should eq(2)
+          end
+
+          it 'first hash has correct columns' do
+            @array.first.has_key?(:id).should be(true)
+            @array.first.has_key?(:display_name).should be(true)
+            @array.first.has_key?(:user_email).should be(true)
+            @array.first.has_key?(:user_registered).should be(true)
+            @array.first.has_key?(:user_login).should be(true)
+            @array.first.has_key?(:roles).should be(true)
+            @array.first.keys.size.should eq(6)
+          end
+        end
       end
-
-      describe 'returns array' do
-        it { @array.kind_of?(Array).should be(true) }
-
-        it 'which contains hashes' do
-          @array.first.kind_of?(Hash).should be(true)
+      context 'tabs and newlines' do
+        before :each do
+          @wpcli.stub(:`).with("wp user list").and_return(wp_user_list_tabs_newlines)
+          @array = @wpcli.run "user list"
         end
 
-        it 'which has two hashes' do
-         @array.size.should eq(2)
-        end
+        describe 'returns array' do
+          it { @array.kind_of?(Array).should be(true) }
 
-        it 'first hash has correct columns' do
-          @array.first.has_key?(:id).should be(true)
-          @array.first.has_key?(:display_name).should be(true)
-          @array.first.has_key?(:user_email).should be(true)
-          @array.first.has_key?(:user_registered).should be(true)
-          @array.first.has_key?(:user_login).should be(true)
-          @array.first.has_key?(:roles).should be(true)
-          @array.first.keys.size.should eq(6)
+          it 'which contains hashes' do
+            @array.first.kind_of?(Hash).should be(true)
+          end
+
+          it 'which has two hashes' do
+           @array.size.should eq(2)
+          end
+
+          it 'first hash has correct columns' do
+            @array.first.has_key?(:id).should be(true)
+            @array.first.has_key?(:display_name).should be(true)
+            @array.first.has_key?(:user_email).should be(true)
+            @array.first.has_key?(:user_registered).should be(true)
+            @array.first.has_key?(:user_login).should be(true)
+            @array.first.has_key?(:roles).should be(true)
+            @array.first.keys.size.should eq(6)
+          end
         end
       end
     end
