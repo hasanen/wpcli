@@ -113,7 +113,7 @@ EOF
           end
 
           it 'which has two hashes' do
-           @array.size.should eq(2)
+           @array.size.should eq(1)
           end
 
           it 'first hash has correct columns' do
