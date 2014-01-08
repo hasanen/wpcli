@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["joni.hasanen@pieceofcode.net"]
   spec.description   = %q{Simple wrapper for wp-cli (http://wp-cli.org/)}
   spec.summary       = %q{Simple wrapper for wp-cli (http://wp-cli.org/)}
-  spec.homepage      = ""
+  spec.homepage      = "http://hasanen.github.io/wpcli"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -19,6 +19,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "rake", "~> 10.1.0"
+  spec.add_development_dependency "rspec", "~> 2.4.1"
 end
