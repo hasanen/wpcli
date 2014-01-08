@@ -42,6 +42,7 @@ And then you can use client with key:
 
 
 You can check if there is any apps in config with
+
     wp_apps?
 
 ## Alternative way
