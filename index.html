@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Wpcli by hasanen</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Wpcli</h1>
+        <h2>Simple wrapper for wp-cli (http://wp-cli.org/).</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/hasanen/wpcli/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/hasanen/wpcli/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/hasanen/wpcli" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a name="wpcli" class="anchor" href="#wpcli"><span class="octicon octicon-link"></span></a>Wpcli</h1>
+
+<p>Simple wrapper for wp-cli (<a href="http://wp-cli.org/">http://wp-cli.org/</a>).</p>
+
+<p>Just pass commands (<a href="http://wp-cli.org/commands/">http://wp-cli.org/commands/</a>) to run method and use returned hash as you wish.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<pre><code>gem 'wpcli', "~&gt; 0.1.4"
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code>$ gem install wpcli
+</code></pre>
+
+<h2>
+<a name="rails" class="anchor" href="#rails"><span class="octicon octicon-link"></span></a>Rails</h2>
+
+<p>Simplest way to use in rails is to create config file and use methods from module.</p>
+
+<p>Generate example config</p>
+
+<pre><code>rails g wpcli:config
+</code></pre>
+
+<p>Generated file (config/wpcli.yml)</p>
+
+<pre><code>apps:
+    key_for_installation: /absolute/path/for/my/wp-installation
+</code></pre>
+
+<p>In controller include module</p>
+
+<pre><code>class MyController &lt; ApplicationController
+  include Wpcli
+</code></pre>
+
+<p>And then you can use client with key:</p>
+
+<pre><code> users = wpcli(:key_for_installation).run "user list"
+</code></pre>
+
+<p>You can check if there is any apps in config with
+    wp_apps?</p>
+
+<h2>
+<a name="alternative-way" class="anchor" href="#alternative-way"><span class="octicon octicon-link"></span></a>Alternative way</h2>
+
+<p>If you like to use client for example in command line, you can create instance with path of wordpress installation</p>
+
+<pre><code>@wpcli = Wpcli::Client.new "path/to/wp"
+users = @wpcli.run "user list"
+</code></pre>
+
+<h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><p><a href="http://badge.fury.io/rb/wpcli"><img src="https://badge.fury.io/rb/wpcli.png" alt="Gem Version"></a></p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
