@@ -16,10 +16,10 @@ module Wpcli
     config = YAML.load(file)
 
     @apps = {}
-    config["apps"].each do |key, path|
-      @apps[key.to_sym] = Client.new path
+    if config.has_key? "apps" && !config["apps"].nil?
+      config["apps"].each do |key, path|
+        @apps[key.to_sym] = Client.new path
+      end
     end
   end
-
-
 end
