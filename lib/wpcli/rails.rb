@@ -4,6 +4,11 @@ module Wpcli
     @apps[key]
   end
 
+  def wp_apps?
+    load_apps if @apps.nil?
+    !@apps.empty?
+  end
+
   private
 
   def load_apps
@@ -15,4 +20,6 @@ module Wpcli
       @apps[key.to_sym] = Client.new path
     end
   end
+
+
 end

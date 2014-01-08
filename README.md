@@ -8,7 +8,7 @@ Just pass commands (http://wp-cli.org/commands/) to run method and use returned 
 
 Add this line to your application's Gemfile:
 
-    gem 'wpcli', "~> 0.1.2"
+    gem 'wpcli', "~> 0.1.3"
 
 And then execute:
 
@@ -39,6 +39,10 @@ In controller include module
 And then you can use client with key:
 
      users = wpcli(:key_for_installation).run "user list"
+
+
+You can check if there is any apps in config with
+    wp_apps?
 
 ## Alternative way
 
