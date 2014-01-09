@@ -60,4 +60,4 @@ If you like to use client for example in command line, you can create instance w
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-[![Gem Version](https://badge.fury.io/rb/wpcli.png)](http://badge.fury.io/rb/wpcli)
+[![Gem Version](https://badge.fury.io/rb/wpcli.png)](http://badge.fury.io/rb/wpcli) [![Build Status](https://travis-ci.org/hasanen/wpcli.png?branch=master)](https://travis-ci.org/hasanen/wpcli)
