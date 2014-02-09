@@ -20,9 +20,12 @@ module Wpcli
             @columns = parse_header line, separator
           else
             if single_value_response
-              rows << {} unless rows.size == 1
               parsed_line = parse_line(line, separator)
-              rows.first[parsed_line[:field].to_sym] = parsed_line[:value]
+              value = parsed_line[:value]
+              unless value.nil? || value == "null"
+                rows << {} unless rows.size == 1
+                rows.first[parsed_line[:field].to_sym] = value
+              end
             else
               rows << parse_line(line, separator)
             end

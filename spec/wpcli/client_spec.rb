@@ -44,6 +44,14 @@ EOF
 +---------------------+------------------------------------+
 EOF
     end
+    let(:single_user_not_found) do <<EOF
++-------+-------+
+| Field | Value |
++-------+-------+
+| roles | null  |
++-------+-------+
+EOF
+    end
 
   describe '.new' do
     let(:path) { "path_to_wp" }
@@ -177,6 +185,20 @@ EOF
           @array.first.has_key?(:roles).should be(true)
           @array.first.keys.size.should eq(11)
         end
+      end
+    end
+    context 'single user not found' do
+      before :each do
+        @wpcli.stub(:`).with("wp user get username").and_return(single_user_not_found)
+        @array = @wpcli.run "user get username"
+      end
+
+      describe 'returns array' do
+          it { @array.kind_of?(Array).should be(true) }
+
+          it 'which has zore hash' do
+            @array.size.should eq(0)
+          end
       end
     end
   end
