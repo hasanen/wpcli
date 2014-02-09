@@ -24,7 +24,27 @@ let(:wp_user_list_tabs_newlines) { "ID\tuser_login\tdisplay_name\tuser_email\tus
 | Subscriber       | subscriber                         |
 +------------------+------------------------------------+
 EOF
+  end
+
+  let(:single_user) do <<EOF
++---------------------+------------------------------------+
+| Field               | Value                              |
++---------------------+------------------------------------+
+| ID                  | 1                                  |
+| user_login          | username                           |
+| user_pass           | hash_of_paassword                  |
+| user_nicename       | Firstname Lastname                 |
+| user_email          |                                    |
+| user_url            |                                    |
+| user_registered     | 2013-11-25 12:41:38                |
+| user_activation_key |                                    |
+| user_status         | 0                                  |
+| display_name        | Nickname                           |
+| roles               | administrator                      |
++---------------------+------------------------------------+
+EOF
     end
+
   describe '.new' do
     let(:path) { "path_to_wp" }
     let(:command) { "user role" }
@@ -125,6 +145,37 @@ EOF
             @array.first.has_key?(:roles).should be(true)
             @array.first.keys.size.should eq(6)
           end
+        end
+      end
+    end
+
+    context 'single user' do
+      before :each do
+        @wpcli.stub(:`).with("wp user get username").and_return(single_user)
+        @array = @wpcli.run "user get username"
+      end
+
+      describe 'returns array' do
+          it { @array.kind_of?(Array).should be(true) }
+
+          it 'which has one hash' do
+           @array.size.should eq(1)
+          end
+
+
+        it 'hash has correct columns' do
+          @array.first.has_key?(:ID).should be(true)
+          @array.first.has_key?(:user_login).should be(true)
+          @array.first.has_key?(:user_pass).should be(true)
+          @array.first.has_key?(:user_nicename).should be(true)
+          @array.first.has_key?(:user_email).should be(true)
+          @array.first.has_key?(:user_url).should be(true)
+          @array.first.has_key?(:user_registered).should be(true)
+          @array.first.has_key?(:user_activation_key).should be(true)
+          @array.first.has_key?(:user_status).should be(true)
+          @array.first.has_key?(:display_name).should be(true)
+          @array.first.has_key?(:roles).should be(true)
+          @array.first.keys.size.should eq(11)
         end
       end
     end

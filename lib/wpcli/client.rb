@@ -19,7 +19,13 @@ module Wpcli
           if index < first_data_row
             @columns = parse_header line, separator
           else
-            rows << parse_line(line, separator)
+            if single_value_response
+              rows << {} unless rows.size == 1
+              parsed_line = parse_line(line, separator)
+              rows.first[parsed_line[:field].to_sym] = parsed_line[:value]
+            else
+              rows << parse_line(line, separator)
+            end
           end
         end
       end
@@ -29,6 +35,7 @@ module Wpcli
     def parse_header line, separator
       columns = []
       line.split(separator).each_with_index do |column, index|
+        detect_if_line_is_from_single_value_response column
         columns[index] = column.strip.downcase unless column.strip.empty?
       end
       columns
@@ -43,6 +50,14 @@ module Wpcli
 
     def starts_with_plus? line
       line.start_with? "+"
+    end
+
+    def detect_if_line_is_from_single_value_response column
+      @single_value = column.strip.downcase == "field" unless @single_value
+    end
+
+    def single_value_response
+      @single_value
     end
   end
 end
