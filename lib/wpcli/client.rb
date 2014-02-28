@@ -14,7 +14,7 @@ module Wpcli
       first_data_row = starts_with_plus?(text) ? 3 : 1
       rows = []
       text.split("\n").each_with_index do |line, index|
-        unless line.blank? || line.starts_with_plus?(line)
+        unless line.blank? || starts_with_plus?(line)
           separator = line.include?('|') ? '|' : "\t"
           if index < first_data_row
             @columns = parse_header line, separator
