@@ -11,6 +11,7 @@ describe Wpcli::Client do
 EOF
     end
 let(:wp_user_list_tabs_newlines) { "ID\tuser_login\tdisplay_name\tuser_email\tuser_registered\troles\n1\tadmin\tadmin\tadmin@domain.tld\t2014-01-07 09:04:08\tadministrator\n" }
+let(:wp_role_list_tabs_newlines) { "name\trole\nAdministrator\tadministrator\nEditor\teditor\nAuthor\tauthor\nContributor\tcontributor\nSubscriber\tsubscriber\n" }
 
 
   let(:wp_role_list) do <<EOF
@@ -199,6 +200,33 @@ EOF
           it 'which has zore hash' do
             @array.size.should eq(0)
           end
+      end
+    end
+
+    context 'multivalue after single value' do
+      before :each do
+        @wpcli.stub(:`).with("wp user get username").and_return(single_user)
+        @array = @wpcli.run "user get username"
+        @wpcli.stub(:`).with("wp role list").and_return(wp_role_list_tabs_newlines)
+        @array = @wpcli.run "role list"
+      end
+
+      describe 'returns array' do
+        it { @array.kind_of?(Array).should be(true)}
+
+        it 'which contains hashes' do
+          @array.first.kind_of?(Hash).should be(true)
+        end
+
+        it 'which has five hashes' do
+          @array.size.should eq(5)
+        end
+
+        it 'first hash has correct columns' do
+          @array.first.has_key?(:name).should be(true)
+          @array.first.has_key?(:role).should be(true)
+          @array.first.keys.size.should eq(2)
+        end
       end
     end
   end

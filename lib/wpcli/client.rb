@@ -11,6 +11,7 @@ module Wpcli
     private
 
     def parse text
+      single_value = false
       first_data_row = starts_with_plus?(text) ? 3 : 1
       rows = []
       text.split("\n").each_with_index do |line, index|
@@ -18,8 +19,9 @@ module Wpcli
           separator = line.include?('|') ? '|' : "\t"
           if index < first_data_row
             @columns = parse_header line, separator
+            single_value = detect_if_line_is_from_single_value_response
           else
-            if single_value_response
+            if single_value
               parsed_line = parse_line(line, separator)
               value = parsed_line[:value]
               unless value.nil? || value == "null"
@@ -42,7 +44,6 @@ module Wpcli
     def parse_header line, separator
       columns = []
       line.split(separator).each_with_index do |column, index|
-        detect_if_line_is_from_single_value_response column
         columns[index] = column.strip.downcase unless column.strip.empty?
       end
       columns
@@ -59,12 +60,11 @@ module Wpcli
       line.start_with? "+"
     end
 
-    def detect_if_line_is_from_single_value_response column
-      @single_value = column.strip.downcase == "field" unless @single_value
-    end
-
-    def single_value_response
-      @single_value
+    def detect_if_line_is_from_single_value_response
+      @columns.each do |column|
+        return true if !column.nil? && column.strip.downcase == "field"
+      end
+      false
     end
   end
 end
