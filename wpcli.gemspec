@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["joni.hasanen@pieceofcode.net"]
   spec.description   = %q{Simple wrapper for wp-cli (http://wp-cli.org/)}
   spec.summary       = %q{Simple wrapper for wp-cli (http://wp-cli.org/)}
-  spec.homepage      = "http://hasanen.github.io/wpcli"
+  spec.homepage      = "http://wpcli.pieceofcode.net"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
