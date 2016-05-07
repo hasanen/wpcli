@@ -63,12 +63,14 @@ First build image with
 Then start the containers
 
     docker-compose up -d
+    
+**Note**: On the first time, go to `http://localhost:8080` and go through wordpress' installation wizard.
 
-And access to irb
+Access to irb
 
     docker exec -it wpcli_wpcli_1 /wpcli/bin/irb
 
-Using the client
+Use the client
 
     Wpcli::Client.new("/var/www/html").run "user list"
 
