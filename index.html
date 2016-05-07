@@ -109,12 +109,14 @@ users = @wpcli.run "user list"
 <pre><code>docker-compose up -d
 </code></pre>
 
-<p>And access to irb</p>
+<p><strong>Note</strong>: On the first time, go to <code>http://localhost:8080</code> and go through wordpress' installation wizard.</p>
+
+<p>Access to irb</p>
 
 <pre><code>docker exec -it wpcli_wpcli_1 /wpcli/bin/irb
 </code></pre>
 
-<p>Using the client</p>
+<p>Use the client</p>
 
 <pre><code>Wpcli::Client.new("/var/www/html").run "user list"
 </code></pre>
