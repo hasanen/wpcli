@@ -4,9 +4,9 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
     <title>Wpcli by hasanen</title>
   </head>
@@ -29,14 +29,14 @@
     <div class="container">
       <section id="main_content">
         <h1>
-<a name="wpcli" class="anchor" href="#wpcli"><span class="octicon octicon-link"></span></a>Wpcli</h1>
+<a id="wpcli" class="anchor" href="#wpcli" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Wpcli</h1>
 
 <p>Simple wrapper for wp-cli (<a href="http://wp-cli.org/">http://wp-cli.org/</a>).</p>
 
 <p>Just pass commands (<a href="http://wp-cli.org/commands/">http://wp-cli.org/commands/</a>) to run method and use returned hash as you wish.</p>
 
 <h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Add this line to your application's Gemfile:</p>
 
@@ -54,7 +54,7 @@
 </code></pre>
 
 <h2>
-<a name="rails" class="anchor" href="#rails"><span class="octicon octicon-link"></span></a>Rails</h2>
+<a id="rails" class="anchor" href="#rails" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Rails</h2>
 
 <p>Simplest way to use in rails is to create config file and use methods from module.</p>
 
@@ -86,7 +86,7 @@
 </code></pre>
 
 <h2>
-<a name="alternative-way" class="anchor" href="#alternative-way"><span class="octicon octicon-link"></span></a>Alternative way</h2>
+<a id="alternative-way" class="anchor" href="#alternative-way" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Alternative way</h2>
 
 <p>If you like to use client for example in command line, you can create instance with path of wordpress installation</p>
 
@@ -95,7 +95,32 @@ users = @wpcli.run "user list"
 </code></pre>
 
 <h2>
-<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+<a id="docker" class="anchor" href="#docker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Docker</h2>
+
+<p>Easiest way to test the gem is to use Docker. </p>
+
+<p>First build image with </p>
+
+<pre><code>docker-compose build
+</code></pre>
+
+<p>Then start the containers</p>
+
+<pre><code>docker-compose up -d
+</code></pre>
+
+<p>And access to irb</p>
+
+<pre><code>docker exec -it wpcli_wpcli_1 /wpcli/bin/irb
+</code></pre>
+
+<p>Using the client</p>
+
+<pre><code>Wpcli::Client.new("/var/www/html").run "user list"
+</code></pre>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
 
 <ol>
 <li>Fork it</li>
@@ -103,7 +128,9 @@ users = @wpcli.run "user list"
 <li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
 <li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
 <li>Create new Pull Request</li>
-</ol><p><a href="http://badge.fury.io/rb/wpcli"><img src="https://badge.fury.io/rb/wpcli.png" alt="Gem Version"></a> <a href="https://travis-ci.org/hasanen/wpcli"><img src="https://travis-ci.org/hasanen/wpcli.png?branch=master" alt="Build Status"></a><a href="https://coveralls.io/r/hasanen/wpcli?branch=master"><img src="https://coveralls.io/repos/hasanen/wpcli/badge.png?branch=master" alt="Coverage Status"></a></p>
+</ol>
+
+<p><a href="http://badge.fury.io/rb/wpcli"><img src="https://badge.fury.io/rb/wpcli.png" alt="Gem Version"></a> <a href="https://travis-ci.org/hasanen/wpcli"><img src="https://travis-ci.org/hasanen/wpcli.png?branch=master" alt="Build Status"></a><a href="https://coveralls.io/r/hasanen/wpcli?branch=master"><img src="https://coveralls.io/repos/hasanen/wpcli/badge.png?branch=master" alt="Coverage Status"></a></p>
       </section>
     </div>
 
