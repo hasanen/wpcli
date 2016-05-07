@@ -52,6 +52,22 @@ If you like to use client for example in command line, you can create instance w
     @wpcli = Wpcli::Client.new "path/to/wp"
     users = @wpcli.run "user list"
 
+## Docker
+
+Easiest way to test the gem is to use Docker. 
+
+First build image with 
+
+    docker-compose build
+    
+Then start the containers
+
+    docker-compose up -d
+
+And access to irb
+
+    docker exec -it wpcli_wpcli_1 /wpcli/bin/irb
+
 ## Contributing
 
 1. Fork it
