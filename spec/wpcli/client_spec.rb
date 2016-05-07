@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Wpcli::Client do
+  let(:wp_option_get_siteurl) do <<EOF
+http://localhost:8080
+EOF
+  end
+
   let(:wp_user_list) do <<EOF
 +----+--------------------------+----------------+------------------------------+---------------------+------------------------------------+
 | ID | user_login               | display_name   | user_email                   | user_registered     | roles                              |
@@ -227,6 +232,17 @@ EOF
           @array.first.has_key?(:role).should be(true)
           @array.first.keys.size.should eq(2)
         end
+      end
+    end
+
+    context "get option" do
+      before :each do
+        @wpcli.stub(:`).with("wp option get siteurl").and_return(wp_option_get_siteurl)
+        @response = @wpcli.run "option get siteurl"
+      end
+
+      it "returns url" do
+        expect(@response).to eq("http://localhost:8080")
       end
     end
   end

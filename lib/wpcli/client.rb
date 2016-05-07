@@ -11,10 +11,13 @@ module Wpcli
     private
 
     def parse text
+      lines = text.split("\n")
+      return text.strip if lines.size == 1
+
       single_value = false
       first_data_row = starts_with_plus?(text) ? 3 : 1
       rows = []
-      text.split("\n").each_with_index do |line, index|
+      lines.each_with_index do |line, index|
         unless is_blank?(line) || starts_with_plus?(line)
           separator = line.include?('|') ? '|' : "\t"
           if index < first_data_row
