@@ -68,6 +68,10 @@ And access to irb
 
     docker exec -it wpcli_wpcli_1 /wpcli/bin/irb
 
+Using the client
+
+    Wpcli::Client.new("/var/www/html").run "user list"
+
 ## Contributing
 
 1. Fork it
