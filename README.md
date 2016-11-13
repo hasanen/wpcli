@@ -1,5 +1,7 @@
 # Wpcli
 
+**Note: No longer supported.** 
+
 Simple wrapper for wp-cli (http://wp-cli.org/).
 
 Just pass commands (http://wp-cli.org/commands/) to run method and use returned hash as you wish.
